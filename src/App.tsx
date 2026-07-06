@@ -1,8 +1,6 @@
 import { useState } from 'react'
 import './App.css'
 import { AnomalyList } from './components/AnomalyList'
-import { ForecastPanel } from './components/ForecastPanel'
-import { ReconciliationPanel } from './components/ReconciliationPanel'
 import { StockTable } from './components/StockTable'
 import { StockTrendChart } from './components/StockTrendChart'
 import { useDashboard } from './data/useDashboard'
@@ -26,9 +24,7 @@ function App() {
       <header>
         <h1>젠테라 자재 재고 대시보드</h1>
         <p className="muted">
-          기준일 6/30 · 품목 {model.items.length}종 · 이상 데이터{' '}
-          {model.report.anomalies.total}건 · 대사 불일치{' '}
-          {model.report.mayReconciliation.mismatch}건
+          기준일 6/30 · 품목 {model.items.length}종 · 이상 데이터 {model.anomalies.length}건
         </p>
       </header>
 
@@ -45,20 +41,7 @@ function App() {
 
       <section>
         <h2>3. 데이터 이상 목록</h2>
-        <AnomalyList
-          anomalies={model.anomalies}
-          mayReconciliation={model.mayReconciliation}
-        />
-      </section>
-
-      <section>
-        <h2>4. 합계 대사표</h2>
-        <ReconciliationPanel report={model.report} />
-      </section>
-
-      <section>
-        <h2>5. 수요 예측</h2>
-        <ForecastPanel forecast={model.forecast} backtest={model.backtest} />
+        <AnomalyList anomalies={model.anomalies} />
       </section>
     </main>
   )
