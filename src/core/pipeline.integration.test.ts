@@ -3,7 +3,7 @@ import { resolve } from 'node:path'
 import { describe, expect, it } from 'vitest'
 import { parseItems, parseIssues, parseReceipts, parseSnapshot } from './parseCsv'
 import { cleanData } from './cleanData'
-import { computeMayReconciliation } from './computeStock'
+import { computeJuneStock, computeMayReconciliation } from './computeStock'
 import { buildReconciliation } from './reconciliation'
 import { backtestWeek, forecastWeek } from './forecast'
 
@@ -18,6 +18,21 @@ describe('실제 데이터 통합 검증', () => {
   const clean = cleanData(rawReceipts, rawIssues, items)
   const recon = computeMayReconciliation(items, snapshot, clean.receipts, clean.issues)
   const report = buildReconciliation(rawReceipts, rawIssues, clean, recon)
+
+  it('6/30 품목별 현재고가 awk 독립 검산과 일치', () => {
+    const stock = computeJuneStock(items, snapshot, clean.receipts, clean.issues)
+    const closing = Object.fromEntries(stock.map((s) => [s.itemCode, s.closingStock]))
+    expect(closing).toEqual({
+      'WD-1001': 1053,
+      'WD-1002': 1015,
+      'CN-2001': 112,
+      'CN-2002': 130,
+      'TM-3001': 192,
+      'TP-4001': 1280,
+      'GR-5001': 1070,
+      'CL-6001': 214,
+    })
+  })
 
   it('5월 대조: 정합 5건 / 불일치 3건', () => {
     expect(recon.filter((r) => r.match)).toHaveLength(5)

@@ -3,3 +3,37 @@
   margin: 0 auto;
   padding: 24px;
 }
+
+header {
+  border-bottom: 2px solid var(--border);
+  padding-bottom: 12px;
+  margin-bottom: 8px;
+}
+
+.muted {
+  color: var(--muted);
+  font-size: 13px;
+}
+
+section {
+  margin-bottom: 36px;
+}
+
+.row-clickable {
+  cursor: pointer;
+}
+
+.row-clickable:hover {
+  background: #faf9fc;
+}
+
+.row-selected {
+  cursor: pointer;
+  background: var(--warn-bg);
+  background: rgba(124, 58, 237, 0.1);
+  font-weight: 600;
+}
+
+.row-warn {
+  background: var(--warn-bg);
+}
