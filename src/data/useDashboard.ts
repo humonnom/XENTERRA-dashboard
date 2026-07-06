@@ -14,7 +14,6 @@ interface DashboardState {
   error: string | null
 }
 
-/** public/data 의 CSV 4종을 fetch → 파싱/정제/계산하여 대시보드 모델 반환 */
 export function useDashboard(): DashboardState {
   const [state, setState] = useState<DashboardState>({
     model: null,

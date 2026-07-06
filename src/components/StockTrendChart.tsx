@@ -13,13 +13,12 @@ interface Props {
   item: ItemStock | undefined
 }
 
-/** 선택 품목의 6월 일별 재고 추이 (5/31 실사 앵커 포함) */
 export function StockTrendChart({ item }: Props) {
   if (!item) return <p>품목을 선택하세요.</p>
 
   // X축은 날짜의 일(day)만 표시해 간결하게
   const data = item.daily.map((p) => ({
-    day: p.date.slice(5), // MM-DD
+    day: p.date.slice(5),
     stock: p.stock,
   }))
 

@@ -1,14 +1,12 @@
 import { enumerateDates } from './computeStock'
 import type { CleanIssue, Item } from './types'
 
-/** 품목별 주간 예측 1행 */
 export interface ForecastRow {
   itemCode: string
   dailyAvg: number // 학습 구간 일평균 출고
   forecastQty: number // dailyAvg × horizonDays
 }
 
-/** 자체검증 정확도 1행 */
 export interface AccuracyRow {
   itemCode: string
   predicted: number
@@ -17,7 +15,6 @@ export interface AccuracyRow {
   pctError: number | null // 실제=0이면 계산 불가(null)
 }
 
-/** 자체검증 요약 */
 export interface AccuracySummary {
   rows: AccuracyRow[]
   mae: number // 평균 절대 오차
@@ -36,7 +33,6 @@ const sumIssuesInRange = (
     .reduce((acc, s) => acc + s.qty, 0)
 
 /**
- * 주간 수요 예측 (계획 §4).
  * 방법: 학습 구간의 일평균 출고 × horizonDays.
  * 데이터가 희소해 요일 가중/회귀 대신 단순·설명가능한 기준선을 채택.
  */
@@ -60,7 +56,6 @@ export function forecastWeek(
 }
 
 /**
- * 자체검증 백테스트 (계획 §4).
  * 학습 구간으로 예측한 뒤 실제 구간과 비교해 MAE/MAPE 산출.
  * 예: 학습=5월, 실제=6/1~6/7 → "5월로 6월 1주 예측"의 오차.
  * MAPE는 실제=0인 품목에서 발산하므로 해당 품목을 제외하고 계산.

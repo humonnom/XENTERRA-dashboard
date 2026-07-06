@@ -7,7 +7,6 @@ interface Props {
   onSelect: (itemCode: string) => void
 }
 
-/** 품목별 현재고 목록 (6/30 기준). BOX 품목은 EA 환산 병기. */
 export function StockTable({ stock, selected, onSelect }: Props) {
   return (
     <table>

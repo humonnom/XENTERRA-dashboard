@@ -14,7 +14,7 @@ export function normalizeCode(code: string): string {
 }
 
 /**
- * 구조적 데이터 정제 (계획 §1-A).
+ * 구조적 데이터 정제.
  * 규칙:
  *  - 품목코드 공백/소문자 → 정규화 보정 (유지)
  *  - 마스터에 없는 품목 → 제외

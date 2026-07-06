@@ -6,7 +6,6 @@ import type {
   RawReceipt,
 } from './types'
 
-/** 정제 전/후 합계 대사 */
 export interface QtyTotals {
   receiptCountRaw: number
   receiptCountClean: number
@@ -18,13 +17,11 @@ export interface QtyTotals {
   issueQtyClean: number
 }
 
-/** 이상 유형별 집계 1행 */
 export interface AnomalyCount {
   type: AnomalyType
   count: number
 }
 
-/** 합계 대사표 (계획 §3) */
 export interface ReconciliationReport {
   totals: QtyTotals
   anomalies: {

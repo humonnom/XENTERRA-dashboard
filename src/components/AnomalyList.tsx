@@ -2,10 +2,9 @@ import type { Anomaly } from '../core/types'
 import { ANOMALY_TYPE_LABEL } from './labels'
 
 interface Props {
-  anomalies: Anomaly[] // §1-A 구조적 이상
+  anomalies: Anomaly[]
 }
 
-/** 데이터 이상 목록: 품질 문제 건과 처리 사유 표시 */
 export function AnomalyList({ anomalies }: Props) {
   return (
     <div>

@@ -1,5 +1,3 @@
-// 도메인 타입 정의 — CSV 원본과 정제 결과, 이상 데이터 표현
-
 /** 품목 마스터 (items.csv) */
 export interface Item {
   itemCode: string
@@ -33,10 +31,8 @@ export interface Snapshot {
   countedQty: number
 }
 
-/** 이상 데이터 처리 방식 */
 export type AnomalyAction = 'excluded' | 'corrected'
 
-/** 이상 데이터 유형 */
 export type AnomalyType =
   | 'code_normalized' // 품목코드 대소문자/공백 → 정규화 보정
   | 'unknown_item' // 마스터에 없는 품목코드 → 제외
@@ -45,7 +41,7 @@ export type AnomalyType =
   | 'negative_qty' // 음수 수량 → 제외
   | 'zero_qty' // 0 수량 → 제외
 
-/** 발견·처리된 이상 데이터 1건 (구조적 이상, §1-A) */
+/** 발견·처리된 구조적 이상 데이터 1건 */
 export interface Anomaly {
   source: 'receipt' | 'issue'
   id: string
@@ -66,7 +62,6 @@ export interface CleanReceipt {
   effectiveUnitPrice: number // 금액 대사에 사용할 단가 (이상 시 마스터 단가)
 }
 
-/** 정제된 출고 */
 export interface CleanIssue {
   issueId: string
   date: string
@@ -74,7 +69,6 @@ export interface CleanIssue {
   qty: number
 }
 
-/** cleanData 결과 */
 export interface CleanResult {
   receipts: CleanReceipt[]
   issues: CleanIssue[]

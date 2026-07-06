@@ -1,6 +1,5 @@
 import type { CleanIssue, CleanReceipt, Item, Snapshot } from './types'
 
-/** 일별 재고 1점 */
 export interface DailyPoint {
   date: string
   stock: number
@@ -17,7 +16,7 @@ export interface ItemStock {
   daily: DailyPoint[] // 5/31 앵커 + 6월 일별 추이
 }
 
-/** 5월 대조 검증 1행 (계획 §1-B) */
+/** 5월 대조 검증 1행 */
 export interface MayReconRow {
   itemCode: string
   theoretical: number // "5/1=0 가정" 이론치 = 5월 입고 − 5월 출고
@@ -60,7 +59,6 @@ function netByItemDate(
 }
 
 /**
- * 6월 품목별 일별 재고 추이 (계획 §2).
  * 6/1 시작값 = 5/31 실사, 이후 6월 정제 거래를 일별 누적.
  * 8개 마스터 품목 전부를 반환 (6월 거래가 없어도 실사값 유지).
  */
@@ -97,10 +95,7 @@ export function computeJuneStock(
   })
 }
 
-/**
- * 5월 대조 검증 (계획 §1-B).
- * "5/1=0 가정" 이론치(5월 입고−출고)를 5/31 실사와 대조하여 불일치 품목 산출.
- */
+/** "5/1=0 가정" 이론치(5월 입고−출고)를 5/31 실사와 대조하여 불일치 품목 산출. */
 export function computeMayReconciliation(
   items: Item[],
   snapshot: Snapshot[],
