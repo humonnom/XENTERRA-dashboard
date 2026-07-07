@@ -12,3 +12,7 @@ export const ANOMALY_TYPE_LABEL: Record<AnomalyType, string> = {
 export function fmtInt(n: number): string {
   return Math.round(n).toLocaleString('ko-KR')
 }
+
+export function refShort(refDate: string): string {
+  return refDate.slice(5).replace('-', '/')
+}
